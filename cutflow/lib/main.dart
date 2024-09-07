@@ -1,4 +1,4 @@
-import 'package:cutflow/firebase_options.dart';
+/* import 'package:cutflow/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
@@ -396,6 +396,46 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
               ),
             ],
           ],
+        ),
+      ),
+    );
+  }
+}
+ */
+import 'package:cutflow/app_routes.dart';
+import 'package:cutflow/controller/auth_controller.dart';
+import 'package:cutflow/controller/navigation_controller.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      initialRoute: AppRoutes.home,
+      getPages: AppRoutes.routes,
+      initialBinding: BindingsBuilder(() {
+        Get.put(NavigationController());
+        Get.put(AuthController());
+      }),
+      title: 'CutFlow',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme,
         ),
       ),
     );
