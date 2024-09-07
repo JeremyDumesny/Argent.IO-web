@@ -1,3 +1,4 @@
+import 'package:cutflow/config/theme.dart';
 import 'package:cutflow/controller/auth_controller.dart';
 import 'package:cutflow/views/pricing_category_section.dart';
 import 'package:flutter/material.dart';
@@ -32,27 +33,27 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFA391CB),
+      backgroundColor: const Color(0xFF353535),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: const Color(0xFFA391CB),
+        backgroundColor: const Color.fromARGB(255, 53, 53, 53),
         title: const Text('CutFlow'),
         actions: MediaQuery.of(context).size.width >= 600
             ? [
                 TextButton(
                   onPressed: () => _scrollToCategory(_category1Key),
-                  child: const Text("Catégorie 1",
-                      style: TextStyle(color: Colors.white)),
+                  child: Text("Catégorie 1",
+                      style: AppThemeStyle.poppinsSemiBold(16, AppColor.white)),
                 ),
                 TextButton(
                   onPressed: () => _scrollToCategory(_category2Key),
-                  child:
-                      const Text("Jeux", style: TextStyle(color: Colors.white)),
+                  child: Text("Jeux",
+                      style: AppThemeStyle.poppinsSemiBold(16, AppColor.white)),
                 ),
                 TextButton(
                   onPressed: () => _scrollToCategory(_category3Key),
-                  child: const Text("Formules",
-                      style: TextStyle(color: Colors.white)),
+                  child: Text("Formules",
+                      style: AppThemeStyle.poppinsSemiBold(16, AppColor.white)),
                 ),
                 IconButton(
                   icon: const Icon(Icons.logout),
@@ -68,34 +69,37 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  const DrawerHeader(
+                  DrawerHeader(
                     decoration: BoxDecoration(
-                      color: Color(0xFF6C5CE7),
+                      color: AppColor.primary,
                     ),
                     child: Text(
                       'Mon Site Web',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
+                      style: AppThemeStyle.poppinsSemiBold(24, AppColor.white),
                     ),
                   ),
                   ListTile(
-                    title: const Text('Catégorie 1'),
+                    title: Text('Catégorie 1',
+                        style:
+                            AppThemeStyle.poppinsSemiBold(16, AppColor.white)),
                     onTap: () {
                       Navigator.pop(context);
                       _scrollToCategory(_category1Key);
                     },
                   ),
                   ListTile(
-                    title: const Text('Jeux'),
+                    title: Text('Jeux',
+                        style:
+                            AppThemeStyle.poppinsSemiBold(16, AppColor.white)),
                     onTap: () {
                       Navigator.pop(context);
                       _scrollToCategory(_category2Key);
                     },
                   ),
                   ListTile(
-                    title: const Text('Formules'),
+                    title: Text('Formules',
+                        style:
+                            AppThemeStyle.poppinsSemiBold(16, AppColor.white)),
                     onTap: () {
                       Navigator.pop(context);
                       _scrollToCategory(_category3Key);
@@ -118,7 +122,7 @@ class _HomePageState extends State<HomePage> {
             ),
             CategoryWidget(
               key: _category2Key,
-              title: "Jeux",
+              title: "Nos Jeux",
               content: "Contenu de la Catégorie 2",
               isCarousel: true,
               carouselItems: [
@@ -163,24 +167,20 @@ class _HomePageState extends State<HomePage> {
   Widget _buildCarouselItem(BuildContext context, String path, String text,
       {bool isAvailable = false}) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         image: DecorationImage(
           colorFilter: isAvailable == false
               ? ColorFilter.mode(
-                  const Color(0xFF6C5CE7).withOpacity(0.5), BlendMode.srcOver)
+                  AppColor.primary.withOpacity(0.5), BlendMode.srcOver)
               : null,
           image: AssetImage(path),
           fit: BoxFit.cover,
         ),
       ),
       child: Center(
-          child: Text(
-        text,
-        style: GoogleFonts.poppins(
-            fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-      )),
+          child:
+              Text(text, style: AppThemeStyle.poppinsBold(24, AppColor.white))),
     );
   }
 }

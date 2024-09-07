@@ -1,3 +1,4 @@
+import 'package:cutflow/config/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,23 +30,20 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
               "Nos Formules",
-              style: GoogleFonts.poppins(
-                  fontSize: 24, fontWeight: FontWeight.bold),
+              style: AppThemeStyle.poppinsBold(36, AppColor.white),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GlowText(
                   "Mensuel",
-                  blurRadius: 0,
-                  offset: const Offset(0, 0),
-                  style: GoogleFonts.poppins(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF6C5CE7)),
+                  blurRadius: _isAnnual ? 0 : 6,
+                  offset: Offset(0, _isAnnual ? 0 : 2),
+                  style: AppThemeStyle.poppinsBold(24, AppColor.primary),
                 ),
                 const SizedBox(width: 16.0),
                 Switch(
+                  inactiveThumbColor: AppColor.primary,
                   value: _isAnnual,
                   onChanged: (value) {
                     setState(() {
@@ -56,12 +54,9 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                 const SizedBox(width: 16.0),
                 GlowText(
                   "Annuel",
-                  blurRadius: 0,
-                  offset: const Offset(0, 0),
-                  style: GoogleFonts.poppins(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF6C5CE7)),
+                  blurRadius: _isAnnual ? 6 : 0,
+                  offset: Offset(0, _isAnnual ? 2 : 0),
+                  style: AppThemeStyle.poppinsBold(24, AppColor.primary),
                 ),
               ],
             ),
@@ -102,7 +97,7 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                 color: Colors.white,
                 shape: BoxShape.rectangle,
                 border: isFamous
-                    ? Border.all(color: const Color(0xFF6C5CE7), width: 4)
+                    ? Border.all(color: AppColor.primary, width: 4)
                     : null,
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -110,12 +105,11 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                 contentPadding: const EdgeInsets.all(16.0),
                 title: Text(
                   title,
-                  style: GoogleFonts.poppins(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  style: AppThemeStyle.poppinsBold(20, AppColor.white),
                 ),
                 subtitle: Text(
                   "${price.toStringAsFixed(2)} ${_isAnnual ? '€ / an' : '€ / mois'}\n$description",
-                  style: GoogleFonts.poppins(fontSize: 16),
+                  style: AppThemeStyle.poppinsRegular(16, AppColor.white),
                 ),
               ),
             ),
@@ -125,16 +119,13 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.0),
-                    color: const Color(0xFF6C5CE7),
+                    color: AppColor.primary,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Populaire",
-                      style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                      style: AppThemeStyle.poppinsBold(16, AppColor.white),
                     ),
                   ),
                 ),

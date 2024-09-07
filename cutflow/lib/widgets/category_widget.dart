@@ -1,3 +1,4 @@
+import 'package:cutflow/config/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,18 +22,18 @@ class CategoryWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,
-            style:
-                GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold),
+            style: AppThemeStyle.poppinsBold(36, AppColor.white),
           ),
           const SizedBox(height: 8.0),
           if (isCarousel && carouselItems != null)
             SizedBox(
               height: 200,
               child: CarouselView(
+                backgroundColor: Colors.transparent,
                 scrollDirection: Axis.horizontal,
                 shrinkExtent: 150,
                 itemExtent: 400,
@@ -44,7 +45,7 @@ class CategoryWidget extends StatelessWidget {
           if (!isCarousel)
             Text(
               content,
-              style: GoogleFonts.poppins(fontSize: 16),
+              style: AppThemeStyle.poppinsRegular(16, AppColor.white),
             ),
         ],
       ),

@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const DrawerHeader(
                     decoration: BoxDecoration(
-                      color: Color(0xFF6C5CE7),
+                      color: AppColor.primary,
                     ),
                     child: Text(
                       'Mon Site Web',
@@ -209,7 +209,7 @@ class Category1 extends StatelessWidget {
         image: DecorationImage(
           colorFilter: isAvalable == false
               ? ColorFilter.mode(
-                  const Color(0xFF6C5CE7).withOpacity(0.5), BlendMode.srcOver)
+                  const AppColor.primary.withOpacity(0.5), BlendMode.srcOver)
               : null,
           image: AssetImage(path),
           fit: BoxFit.cover,
@@ -296,7 +296,7 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                   style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF6C5CE7)),
+                      color: const AppColor.primary),
                 ),
                 const SizedBox(width: 16.0),
                 Switch(
@@ -315,7 +315,7 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                   style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF6C5CE7)),
+                      color: const AppColor.primary),
                 ),
               ],
             ),
@@ -357,7 +357,7 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                 color: Colors.white,
                 shape: BoxShape.rectangle,
                 border: isFamous
-                    ? Border.all(color: const Color(0xFF6C5CE7), width: 4)
+                    ? Border.all(color: const AppColor.primary, width: 4)
                     : null,
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -380,7 +380,7 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.0),
-                    color: const Color(0xFF6C5CE7),
+                    color: const AppColor.primary,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -402,14 +402,9 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
   }
 }
  */
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cutflow/app_routes.dart';
 import 'package:cutflow/controller/auth_controller.dart';
 import 'package:cutflow/controller/navigation_controller.dart';
-import 'package:cutflow/views/auth_page.dart';
-import 'package:cutflow/views/home_page.dart';
-import 'package:cutflow/views/login_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -421,7 +416,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(const MyApp());
 }
 
@@ -431,26 +425,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: Obx(() {
+      /* home: Obx(() {
         final authController = Get.find<AuthController>();
         if (authController.firebaseUser.value != null) {
           return const HomePage();
         } else {
           return AuthPage(isLogin: true);
         }
-      }),
+      }), */
+      initialRoute: AppRoutes.home,
       getPages: AppRoutes.routes,
       initialBinding: BindingsBuilder(() {
         Get.put(NavigationController());
         Get.put(AuthController());
       }),
       title: 'CutFlow',
-      theme: ThemeData(
+      /* theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
-      ),
+      ), */
     );
   }
 }
