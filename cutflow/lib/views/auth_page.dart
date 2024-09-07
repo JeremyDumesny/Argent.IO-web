@@ -1,12 +1,12 @@
-/* import 'package:cutflow/controller/auth_controller.dart';
+import 'package:cutflow/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignupPage extends StatelessWidget {
-  SignupPage({super.key});
+class AuthPage extends StatelessWidget {
+  final bool isLogin; // Si vrai, la page agit comme une page de connexion
+  AuthPage({super.key, required this.isLogin});
 
   final AuthController authController = Get.find();
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -14,7 +14,8 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title:
+            Text(isLogin ? 'Login' : 'Sign Up'), // Dynamique selon le contexte
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,18 +34,23 @@ class SignupPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                authController.signUpWithEmail(
-                  emailController.text.trim(),
-                  passwordController.text.trim(),
+                authController.authenticate(
+                  email: emailController.text.trim(),
+                  password: passwordController.text.trim(),
+                  isLogin: isLogin, // Détermine si on se connecte ou s'inscrit
                 );
               },
-              child: const Text('Sign Up'),
+              child: Text(isLogin ? 'Login' : 'Sign Up'),
             ),
             TextButton(
               onPressed: () {
-                Get.back(); // Retour à la page de connexion
+                Get.toNamed(isLogin
+                    ? '/signup'
+                    : '/login'); // Naviguer entre connexion et inscription
               },
-              child: const Text('Already have an account? Login'),
+              child: Text(isLogin
+                  ? "Don't have an account? Sign up"
+                  : 'Already have an account? Login'),
             ),
           ],
         ),
@@ -52,4 +58,3 @@ class SignupPage extends StatelessWidget {
     );
   }
 }
- */

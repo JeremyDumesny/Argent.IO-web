@@ -1,5 +1,7 @@
+import 'package:cutflow/controller/auth_controller.dart';
 import 'package:cutflow/views/pricing_category_section.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/category_widget.dart';
 
@@ -24,6 +26,8 @@ class _HomePageState extends State<HomePage> {
           duration: const Duration(seconds: 1), curve: Curves.easeInOut);
     }
   }
+
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +54,12 @@ class _HomePageState extends State<HomePage> {
                   child: const Text("Formules",
                       style: TextStyle(color: Colors.white)),
                 ),
+                IconButton(
+                  icon: const Icon(Icons.logout),
+                  onPressed: () {
+                    authController.signOut();
+                  },
+                )
               ]
             : null,
       ),
