@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "110117611306",
+    "project_id": "cutflow-1925a",
+    "storage_bucket": "cutflow-1925a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110117611306:android:81fd0c9d766eb69799a053",
+        "android_client_info": {
+          "package_name": "com.cutflow.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdsz4XDLlQSzqLcH8RqBCopXx_KvJQWfs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
