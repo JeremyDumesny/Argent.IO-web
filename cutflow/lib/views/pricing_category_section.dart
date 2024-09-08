@@ -62,28 +62,74 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
             ),
           ]),
           const SizedBox(height: 16.0),
-          Row(
-            children: [
-              _buildPricingCard("Plan Basic", _isAnnual ? 100 : 10,
-                  "Le plan de base avec toutes les fonctionnalités essentielles."),
-              const SizedBox(width: 16.0),
-              _buildPricingCard("Plan Standard", _isAnnual ? 200 : 20,
-                  "Le plan standard avec fonctionnalités supplémentaires.",
-                  isFamous: true),
-              const SizedBox(width: 16.0),
-              _buildPricingCard(
-                "Plan Premium",
-                _isAnnual ? 300 : 30,
-                "Le plan premium avec toutes les fonctionnalités avancées.",
-              ),
-            ],
-          )
+          MediaQuery.of(context).size.width >= 600
+              ? Row(
+                  children: [
+                    _buildPricingCard(
+                      "Plan Basic",
+                      _isAnnual ? 100 : 10,
+                      [
+                        "Le plan premium avec toutes les fonctionnalités avancées.",
+                        "....."
+                      ],
+                    ),
+                    const SizedBox(width: 16.0),
+                    _buildPricingCard(
+                        "Plan Standard",
+                        _isAnnual ? 200 : 20,
+                        [
+                          "Le plan premium avec toutes les fonctionnalités avancées.",
+                          "....."
+                        ],
+                        isFamous: true),
+                    const SizedBox(width: 16.0),
+                    _buildPricingCard(
+                      "Plan Premium",
+                      _isAnnual ? 300 : 30,
+                      [
+                        "Le plan premium avec toutes les fonctionnalités avancées.",
+                        "....."
+                      ],
+                    ),
+                  ],
+                )
+              : Column(
+                children: [
+                  _buildPricingCard(
+                    "Plan Basic",
+                    _isAnnual ? 100 : 10,
+                    [
+                      "Le plan premium avec toutes les fonctionnalités avancées.",
+                      "....."
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  _buildPricingCard(
+                      "Plan Standard",
+                      _isAnnual ? 200 : 20,
+                      [
+                        "Le plan premium avec toutes les fonctionnalités avancées.",
+                        "....."
+                      ],
+                      isFamous: true),
+                  const SizedBox(height: 16.0),
+                  _buildPricingCard(
+                    "Plan Premium",
+                    _isAnnual ? 300 : 30,
+                    [
+                      "Le plan premium avec toutes les fonctionnalités avancées.",
+                      "....."
+                    ],
+                  ),
+                ],
+              )
         ],
       ),
     );
   }
 
-  Widget _buildPricingCard(String title, double price, String description,
+  Widget _buildPricingCard(
+      String title, double price, List<String> descriptions,
       {bool isFamous = false}) {
     return Expanded(
       child: GestureDetector(
@@ -93,26 +139,44 @@ class _PricingCategorySectionState extends State<PricingCategorySection> {
         child: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.rectangle,
-                border: isFamous
-                    ? Border.all(color: AppColor.primary, width: 4)
-                    : null,
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(16.0),
-                title: Text(
-                  title,
-                  style: AppThemeStyle.poppinsBold(20, AppColor.white),
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  shape: BoxShape.rectangle,
+                  border: isFamous
+                      ? Border.all(color: AppColor.primary, width: 4)
+                      : null,
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-                subtitle: Text(
-                  "${price.toStringAsFixed(2)} ${_isAnnual ? '€ / an' : '€ / mois'}\n$description",
-                  style: AppThemeStyle.poppinsRegular(16, AppColor.white),
-                ),
-              ),
-            ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style:
+                            AppThemeStyle.poppinsSemiBold(24, AppColor.black),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "${price.toStringAsFixed(2)} ",
+                            style: AppThemeStyle.poppinsRegular(
+                                16, AppColor.black),
+                          ),
+                          Text(
+                            "€ / mois",
+                            style: AppThemeStyle.poppinsRegular(
+                                16, AppColor.black),
+                          ),
+                        ],
+                      ),
+                      for (var description in descriptions) ...[
+                        Text(description)
+                      ]
+                    ],
+                  ),
+                )),
             if (isFamous) ...[
               Align(
                 alignment: Alignment.topRight,

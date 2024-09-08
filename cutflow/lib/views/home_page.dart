@@ -37,7 +37,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 53, 53, 53),
-        title: const Text('CutFlow'),
+        title: Text('CutFlow',
+            style: AppThemeStyle.poppinsBold(24, AppColor.primary)),
         actions: MediaQuery.of(context).size.width >= 600
             ? [
                 TextButton(
